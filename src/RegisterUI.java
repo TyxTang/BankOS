@@ -83,7 +83,7 @@ public class RegisterUI extends JFrame {
             if (password1.equals(password3)) {
                 sql.insertData(id1, password1, name1, phone1, email1, address1, type1, 0);
                 this.dispose();
-                JOptionPane.showMessageDialog(null, "注册成功！您的银行卡号为：" + id1, "提示", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "注册成功！您的银行卡号为：" + id1 + "（已复制到剪贴板）", "提示", JOptionPane.INFORMATION_MESSAGE);
                 StringSelection stringSelection = new StringSelection(String.valueOf(id1));  //弹出注册成功提示框并展示银行卡号，将银行卡号复制到剪贴板
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
                 new LoginUI();
