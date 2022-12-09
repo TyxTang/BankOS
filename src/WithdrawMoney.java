@@ -25,6 +25,7 @@ public class WithdrawMoney extends JFrame {
         sql.createTable();
         cancel2.addActionListener(e -> {
             WithdrawMoney.this.dispose();
+            MenuMain menuMain = new MenuMain();
         });
         done2.addActionListener(e -> {
             //取钱
