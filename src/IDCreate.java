@@ -9,7 +9,6 @@ public static long getID() {
         long id = createID();
         return id;
     }
-
     //从数据库中读取ID，判断是否重复
 
 

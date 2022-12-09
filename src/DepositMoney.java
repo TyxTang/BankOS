@@ -15,8 +15,8 @@ public class DepositMoney extends JFrame{
         done1=new JButton("确定");
         con.add(cq1);
         con.add(cqInput);
-        con.add(cancel1);
         con.add(done1);
+        con.add(cancel1);
         this.setSize(340, 100);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,10 +24,16 @@ public class DepositMoney extends JFrame{
         SQL sql = new SQL();
         sql.createTable();
         cancel1.addActionListener(e -> {
-            MenuMain me =new MenuMain();
+            DepositMoney.this.dispose();
         });
         done1.addActionListener(e -> {
-            MenuMain me =new MenuMain();
+            //存钱
+            double cq = Double.parseDouble(cqInput.getText());
+            SQL sql1 = new SQL();
+            sql1.recharge(IDnow.getID_now(),cq);
+            //弹出存钱成功
+            JOptionPane.showMessageDialog(null, "存钱成功！存款金额为：" + cq , "提示", JOptionPane.INFORMATION_MESSAGE);
+            DepositMoney.this.dispose();
         });
     }
 }

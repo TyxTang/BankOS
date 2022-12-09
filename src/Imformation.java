@@ -8,56 +8,66 @@ import java.awt.event.WindowEvent;
 
 public class Imformation extends JFrame {
     JTextField ID = new JTextField(20);
+    //设置不可编辑ID
+
     JTextField name = new JTextField(20);
 
 
-    JTextField home = new JTextField(20);
-    JTextField address = new JTextField(29);
+    JTextField Phone = new JTextField(20);
+
+    JTextField mail = new JTextField(20);
+    JTextField address = new JTextField(20);
+    JTextField type = new JTextField(20);
 
     JButton operate =  new JButton("继续");
     JButton exit = new JButton("退出");
     public Imformation() {
         super("账户信息查询");
+        SQL sql = new SQL();
         this.setLayout(new FlowLayout());
         this.add(new JLabel("银行卡号"));
         this.add(ID);
-        this.add(new JLabel("姓名"));
+        ID.setText(String.valueOf(IDnow.getID_now()));
+        ID.setEditable(false);
+        this.add(new JLabel("姓        名"));
         this.add(name);
+        name.setText(String.valueOf(IDnow.getName()));
+        name.setEditable(false);
         this.add(new JLabel("电话号码"));
-        this.add(home);
-        this.add(new JLabel("邮箱"));
+        this.add(Phone);
+        Phone.setText(String.valueOf(IDnow.getPhone()));
+        Phone.setEditable(false);
+        this.add(new JLabel("邮        箱"));
+        this.add(mail);
+        mail.setText(String.valueOf(IDnow.getEmail()));
+        mail.setEditable(false);
+        this.add(new JLabel("地        址"));
         this.add(address);
-        this.add(operate);
+        address.setText(String.valueOf(IDnow.getAddress()));
+        address.setEditable(false);
+        this.add(new JLabel("账户类型"));
+        this.add(type);
+        type.setText(String.valueOf(IDnow.getType()));
+        type.setEditable(false);
         this.add(exit);
         this.pack();
-        operate.addActionListener(new ActionListener1());
-        exit.addActionListener(new ActionListener1());
+        exit.addActionListener(new ActionQuit());
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
-        this.setSize(400,250);
+        this.setSize(305,250);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
-    class ActionListener1 implements ActionListener {
+    class ActionQuit implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource () == operate){
-                ID.setText (" ");
-                name.setText (" ");
-
-                home.setText (" ");
-                address.setText (" ");
-
-            }
-            else if (e.getSource () == exit) {
-                System.exit(0);
-            }
+            Imformation.this.dispose();
         }
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Imformation Do = new Imformation();
-    }
+    }*/
 }
 

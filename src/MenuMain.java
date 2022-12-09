@@ -37,7 +37,7 @@ public class MenuMain extends JFrame {
         SQL sql = new SQL();
         sql.createTable();
         checkInf.addActionListener(e -> {
-            LoginUI login = new LoginUI();
+            Imformation imformation = new Imformation();
         });
         inMoney.addActionListener(e -> {
             DepositMoney de=new DepositMoney();

@@ -37,7 +37,7 @@ public class SQL {
         }
     }
     //插入数据
-    public void insertData(long ID, String name, String password, String phone, String email, String address, String type, int balance) {
+    public void insertData(long ID, String name, String password, String phone, String email, String address, String type, double balance) {
         try {
             Statement stmt = con.createStatement();
             String sql = "insert into user values(" + ID + ",'" + name + "','" + password + "','" + phone + "','" + email + "','" + address + "','" + type + "'," + balance + ")";
@@ -65,6 +65,121 @@ public class SQL {
             rs.close();
         } catch (SQLException e) {
             System.out.println("查询失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return false;
+    }
+    //传入账户名,返回手机号
+    public String getPhone(long ID) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "select * from user where ID = " + ID;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getString("phone");
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("查询失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return null;
+    }
+
+    //传入账户名,返回邮箱
+    public String getEmail(long ID) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "select * from user where ID = " + ID;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getString("email");
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("查询失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return null;
+    }
+
+    //传入账户名,返回地址
+    public String getAddress(long ID) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "select * from user where ID = " + ID;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getString("address");
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("查询失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return null;
+    }
+
+    //传入账户名,返回余额
+    public double getBalance(long ID) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "select * from user where ID = " + ID;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt("balance");
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("查询失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return 0;
+    }
+
+    //传入账户名,返回类型
+    public String getType(long ID) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "select * from user where ID = " + ID;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getString("type");
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("查询失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return null;
+    }
+
+    //传入账户名,返回姓名
+    public String getName(long ID) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "select * from user where ID = " + ID;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getString("name");
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("查询失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return null;
+    }
+
+    //传入账户名和金额,返回是否充值成功
+    public boolean recharge(long ID, double money) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "update user set balance = balance + " + money + " where ID = " + ID;
+            stmt.execute(sql);
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("充值失败! 错误代码：\"" + e.getMessage() + "\"");
         }
         return false;
     }
