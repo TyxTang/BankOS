@@ -15,8 +15,8 @@ public class WithdrawMoney extends JFrame {
         done2=new JButton("确定");
         con.add(cq2);
         con.add(qqInput);
-        con.add(cancel2);
         con.add(done2);
+        con.add(cancel2);
         this.setSize(340, 100);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,10 +24,20 @@ public class WithdrawMoney extends JFrame {
         SQL sql = new SQL();
         sql.createTable();
         cancel2.addActionListener(e -> {
-            MenuMain me =new MenuMain();
+            WithdrawMoney.this.dispose();
         });
         done2.addActionListener(e -> {
-            MenuMain me =new MenuMain();
+            //取钱
+            double qq = Double.parseDouble(qqInput.getText());
+            SQL sql1 = new SQL();
+            if(sql1.outMoney(IDnow.getID_now(),qq)){
+                JOptionPane.showMessageDialog(null, "取款成功！取款金额为：" + qq , "提示", JOptionPane.INFORMATION_MESSAGE);
+                WithdrawMoney.this.dispose();
+                MenuMain menuMain = new MenuMain();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "取款失败！余额不足，你的余额为：" + sql.getBalance(IDnow.getID_now()), "提示", JOptionPane.INFORMATION_MESSAGE);
+            }
         });
     }
 }

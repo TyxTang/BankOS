@@ -30,10 +30,14 @@ public class DepositMoney extends JFrame{
             //存钱
             double cq = Double.parseDouble(cqInput.getText());
             SQL sql1 = new SQL();
-            sql1.recharge(IDnow.getID_now(),cq);
-            //弹出存钱成功
-            JOptionPane.showMessageDialog(null, "存钱成功！存款金额为：" + cq , "提示", JOptionPane.INFORMATION_MESSAGE);
-            DepositMoney.this.dispose();
+            if(sql1.recharge(IDnow.getID_now(),cq)){
+                JOptionPane.showMessageDialog(null, "存款成功！存款金额为：" + cq , "提示", JOptionPane.INFORMATION_MESSAGE);
+                DepositMoney.this.dispose();
+                MenuMain menuMain = new MenuMain();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "存款失败！请检查网络连接并联系TyxTang", "提示", JOptionPane.INFORMATION_MESSAGE);
+            }
         });
     }
 }

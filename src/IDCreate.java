@@ -6,10 +6,15 @@ public static long createID() {
     }
     //getID
 public static long getID() {
-        long id = createID();
-        return id;
+    SQL sql = new SQL();
+        if(!sql.checkID(createID())){
+            return createID();
+        }
+        else{
+            return getID();
+        }
     }
-    //从数据库中读取ID，判断是否重复
+
 
 
 }

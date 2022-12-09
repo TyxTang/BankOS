@@ -18,6 +18,7 @@ public class Imformation extends JFrame {
     JTextField mail = new JTextField(20);
     JTextField address = new JTextField(20);
     JTextField type = new JTextField(20);
+    JTextField balance = new JTextField(20);
 
     JButton operate =  new JButton("继续");
     JButton exit = new JButton("退出");
@@ -45,6 +46,10 @@ public class Imformation extends JFrame {
         this.add(address);
         address.setText(String.valueOf(IDnow.getAddress()));
         address.setEditable(false);
+        this.add(new JLabel("余        额"));
+        this.add(balance);
+        balance.setText(String.valueOf(IDnow.getBalance()));
+        balance.setEditable(false);
         this.add(new JLabel("账户类型"));
         this.add(type);
         type.setText(String.valueOf(IDnow.getType()));
@@ -57,13 +62,14 @@ public class Imformation extends JFrame {
                 System.exit(0);
             }
         });
-        this.setSize(305,250);
+        this.setSize(305,280);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
     class ActionQuit implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             Imformation.this.dispose();
+            MenuMain menuMain = new MenuMain();
         }
     }
     /*public static void main(String[] args) {

@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuMain extends JFrame {
-    private JLabel Title1;
+    private JLabel Title1,Title2,Title3;
     private JButton checkInf, inMoney, outMoney, editInf, quit;
     public MenuMain(){
         super("主菜单");
@@ -13,6 +13,18 @@ public class MenuMain extends JFrame {
         Title1 = new JLabel("主菜单");
         Title1.setFont(new Font("黑体", Font.PLAIN, 40));
         Title1.setHorizontalAlignment(SwingConstants.CENTER);
+        JButton d=new JButton("                          " +"                    ");
+        d.setContentAreaFilled(false);
+        d.setBorderPainted(false);
+        d.setEnabled(false);
+        Title2 = new JLabel("余额：");
+        Title2.setFont(new Font("黑体", Font.PLAIN, 14));
+        Title2.setHorizontalAlignment(SwingConstants.CENTER);
+        //Title3的值为从数据库中读取的余额
+        SQL sql_menu = new SQL();
+        Title3 = new JLabel(sql_menu.getBalance(IDnow.getID_now()) + "");
+        Title3.setFont(new Font("黑体", Font.PLAIN, 14));
+        Title3.setHorizontalAlignment(SwingConstants.CENTER);
         checkInf =new JButton("1.查看账户信息");
         inMoney =new JButton("2.存钱");
         outMoney =new JButton("3.取钱");
@@ -25,6 +37,8 @@ public class MenuMain extends JFrame {
         quit.setPreferredSize(new Dimension(200,35));
         quit.addActionListener(new handlerTc());
         c.add(Title1);
+        c.add(Title2);
+        c.add(Title3);
         c.add(checkInf);
         c.add(inMoney);
         c.add(outMoney);
@@ -38,15 +52,19 @@ public class MenuMain extends JFrame {
         sql.createTable();
         checkInf.addActionListener(e -> {
             Imformation imformation = new Imformation();
+            MenuMain.this.dispose();
         });
         inMoney.addActionListener(e -> {
             DepositMoney de=new DepositMoney();
+            MenuMain.this.dispose();
         });
         outMoney.addActionListener(e -> {
             WithdrawMoney wi=new WithdrawMoney();
+            MenuMain.this.dispose();
         });
         editInf.addActionListener(e -> {
-            LoginUI login = new LoginUI();
+            changimformation changimformation = new changimformation();
+            MenuMain.this.dispose();
         });
     }
     class handlerTc implements ActionListener {

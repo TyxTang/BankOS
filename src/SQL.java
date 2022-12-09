@@ -33,7 +33,7 @@ public class SQL {
             stmt.close();
             System.out.println("建立数据库成功!");
         } catch (SQLException e) {
-            System.out.println("\n检测到数据库已存在 错误代码：\"" + e.getMessage() + "\"\n");
+            System.out.println("\n检测到数据库已存在 返回代码（可能不是错误）：\"" + e.getMessage() + "\"\n");
         }
     }
     //插入数据
@@ -180,6 +180,73 @@ public class SQL {
             return true;
         } catch (SQLException e) {
             System.out.println("充值失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return false;
+    }
+
+    //传入账户名和金额,检查余额是否不足,返回是否消费成功
+    public boolean outMoney(long ID, double money) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "select * from user where ID = " + ID;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                if (rs.getInt("balance") < money) {
+                    return false;
+                }
+            }
+            sql = "update user set balance = balance - " + money + " where ID = " + ID;
+            stmt.execute(sql);
+            stmt.close();
+            rs.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("取款失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return false;
+    }
+
+    //传入账户名和新密码,返回是否修改成功
+    public boolean changePassword(long ID, String password) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "update user set password = '" + password + "' where ID = " + ID;
+            stmt.execute(sql);
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("修改密码失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return false;
+    }
+
+    //传入账户名和新地址,新电话,新邮箱,返回是否修改成功
+    public boolean changeInfo(long ID, String address, String phone, String email) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "update user set address = '" + address + "', phone = '" + phone + "', email = '" + email + "' where ID = " + ID;
+            stmt.execute(sql);
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("修改信息失败! 错误代码：\"" + e.getMessage() + "\"");
+        }
+        return false;
+    }
+
+    //传入账户名，检查是否存在，返回是否存在
+    public boolean checkID(long ID) {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "select * from user where ID = " + ID;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return true;
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("查询失败! 错误代码：\"" + e.getMessage() + "\"");
         }
         return false;
     }
