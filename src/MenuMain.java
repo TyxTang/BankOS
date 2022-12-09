@@ -26,7 +26,7 @@ class MenuMain extends JFrame {
         checkInf.addActionListener(new CheckInf());
         outMoney.addActionListener(new inMoney_menu());
         editInf.addActionListener(new outMoney_menu());
-        ExitMenu.addActionListener(new handlerTc());
+        ExitMenu.addActionListener(new Quit());
         c.add(Title1);
         c.add(checkInf);
         c.add(inMoney);
@@ -41,7 +41,7 @@ class MenuMain extends JFrame {
 
     }
 
-    class handlerTc implements ActionListener {
+    class Quit implements ActionListener {
         public  void actionPerformed(ActionEvent e) {
             MenuMain.this.dispose();
             new LoginUI();
@@ -55,7 +55,7 @@ class MenuMain extends JFrame {
     }
     class inMoney_menu implements ActionListener {
         public void withdraw(double a){
-
+            DepositMoney de=new DepositMoney();
         }
         public void actionPerformed(ActionEvent e) {
             withdraw(100);
@@ -63,7 +63,7 @@ class MenuMain extends JFrame {
     }
     class outMoney_menu implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
+            WithdrawMoney wi=new WithdrawMoney();
         }
     }
 }
