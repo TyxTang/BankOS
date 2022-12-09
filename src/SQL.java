@@ -126,7 +126,12 @@ public class SQL {
             String sql = "select * from user where ID = " + ID;
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()) {
-                return rs.getDouble("balance");
+                //判断是否为十六进制，是则转换为十进制
+                if (rs.getString("balance").startsWith("0x")) {
+                    return Integer.parseInt(rs.getString("balance").substring(2), 16);
+                } else {
+                    return rs.getDouble("balance");
+                }
             }
             stmt.close();
             rs.close();
@@ -191,8 +196,15 @@ public class SQL {
             String sql = "select * from user where ID = " + ID;
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()) {
-                if (rs.getInt("balance") < money) {
-                    return false;
+                //判断是否为十六进制，是则转换为十进制
+                if (rs.getString("balance").startsWith("0x")) {
+                    if (Integer.parseInt(rs.getString("balance").substring(2), 16) < money) {
+                        return false;
+                    }
+                } else {
+                    if (rs.getDouble("balance") < money) {
+                        return false;
+                    }
                 }
             }
             sql = "update user set balance = balance - " + money + " where ID = " + ID;
