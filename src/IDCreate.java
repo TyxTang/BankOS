@@ -1,12 +1,12 @@
 public class IDCreate {
     //随机生成int类型ID
-public static int createID() {
-        int id = (int) (Math.random() * 1000000000000000000L);
+public static long createID() {
+        long id = (long) (Math.random() * 1000000000000000000L);
         return id;
     }
     //getID
-public static int getID() {
-        int id = createID();
+public static long getID() {
+        long id = createID();
         return id;
     }
 

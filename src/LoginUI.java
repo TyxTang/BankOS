@@ -43,7 +43,7 @@ public class LoginUI extends JFrame {
         passwordPan.add(password);
         passwordPan.add(passwordInput);
         c.add(passwordPan);
-        passwordString = new String(passwordInput.getPassword());
+        //passwordString = new String(passwordInput.getPassword());
         JPanel okPan = new JPanel();
         okPan.add(ok_null_Text);
         okPan.add(ok);
@@ -58,10 +58,12 @@ public class LoginUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
     }
+
     public String getId(){
         return idInput.getText();
     }
     public String getPassword(){
+        String passwordString = new String(passwordInput.getPassword());
         return passwordString;
     }
 
@@ -72,14 +74,14 @@ public class LoginUI extends JFrame {
     }
     class handler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            //将账号密码与数据库中的账号密码进行比对
+
             LoginInspection login = new LoginInspection();
-            if(login.login(getId(), getPassword())){
-                new LoginUI();
+            if(login.match(Long.parseLong(getId()), getPassword())){
+                new MenuMain();
                 dispose();
             }
             else{
-                JOptionPane.showMessageDialog(null, "账号或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
+                ok_null_Text.setText("登录失败");
             }
         }
     }

@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 
 public class RegisterUI extends JFrame {
     public RegisterUI(){
@@ -28,6 +29,8 @@ public class RegisterUI extends JFrame {
         JTextField emailText = new JTextField(20);
         JTextField addressText = new JTextField(20);
         JTextField typeText = new JTextField(20);
+        typeText.setText("储蓄卡");
+        typeText.setEditable(false);
         JButton register = new JButton("注册");
         JButton cancel = new JButton("取消");
         //调用IDCreate类生成银行卡号
@@ -67,8 +70,8 @@ public class RegisterUI extends JFrame {
         SQL sql = new SQL();
         sql.createTable();
         register.addActionListener(e -> {
-            //id类型为int
-            int id1 = Integer.parseInt(idText.getText());
+            //id类型为long
+            long id1 = Long.parseLong(idText.getText());
             //password类型为String
             String password1 = String.valueOf(passwordText.getPassword());
             String password3 = String.valueOf(password2Text.getPassword());
@@ -80,6 +83,9 @@ public class RegisterUI extends JFrame {
             if (password1.equals(password3)) {
                 sql.insertData(id1, password1, name1, phone1, email1, address1, type1, 0);
                 this.dispose();
+                JOptionPane.showMessageDialog(null, "注册成功！您的银行卡号为：" + id1, "提示", JOptionPane.INFORMATION_MESSAGE);
+                StringSelection stringSelection = new StringSelection(String.valueOf(id1));  //弹出注册成功提示框并展示银行卡号，将银行卡号复制到剪贴板
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
                 new LoginUI();
             } else {
                 JOptionPane.showMessageDialog(null, "两次密码不一致", "错误", JOptionPane.ERROR_MESSAGE);
