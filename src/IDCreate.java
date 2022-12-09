@@ -1,21 +1,16 @@
 public class IDCreate {
-    //随机生成ID
-    public static String createID() {
-        String id = "";
-        for (int i = 0; i < 18; i++) {
-            id += (int) (Math.random() * 10);
-        }
+    //随机生成int类型ID
+public static int createID() {
+        int id = (int) (Math.random() * 1000000000000000000L);
         return id;
     }
-    static String getID() {
-        String id = createID();
-        while (true) {
-            if (id.charAt(0) != '0') {
-                break;
-            }
-            id = createID();
-        }
+    //getID
+public static int getID() {
+        int id = createID();
         return id;
     }
+
+    //从数据库中读取ID，判断是否重复
+
 
 }

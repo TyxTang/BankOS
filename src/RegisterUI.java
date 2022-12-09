@@ -32,7 +32,7 @@ public class RegisterUI extends JFrame {
         JButton cancel = new JButton("取消");
         //调用IDCreate类生成银行卡号
         IDCreate idCreate = new IDCreate();
-        idText.setText(idCreate.getID());
+        idText.setText(String.valueOf(idCreate.getID()));
         JPanel Titlepan = new JPanel();
         Titlepan.add(Title);
         c.add(Titlepan);
@@ -58,5 +58,33 @@ public class RegisterUI extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        //点击取消按钮，返回登录界面
+        cancel.addActionListener(e -> {
+            this.dispose();
+            new LoginUI();
+        });
+        //点击注册按钮，连接数据库通过insertData方法将数据插入数据库，返回登录界面
+        SQL sql = new SQL();
+        sql.createTable();
+        register.addActionListener(e -> {
+            //id类型为int
+            int id1 = Integer.parseInt(idText.getText());
+            //password类型为String
+            String password1 = String.valueOf(passwordText.getPassword());
+            String password3 = String.valueOf(password2Text.getPassword());
+            String name1 = nameText.getText();
+            String phone1 = phoneText.getText();
+            String email1 = emailText.getText();
+            String address1 = addressText.getText();
+            String type1 = typeText.getText();
+            if (password1.equals(password3)) {
+                sql.insertData(id1, password1, name1, phone1, email1, address1, type1, 0);
+                this.dispose();
+                new LoginUI();
+            } else {
+                JOptionPane.showMessageDialog(null, "两次密码不一致", "错误", JOptionPane.ERROR_MESSAGE);
+            }
+        });
     }
+
 }
