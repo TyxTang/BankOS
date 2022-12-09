@@ -43,7 +43,7 @@ public class SQL {
     public void insertData(int ID, String name, String password, String phone, String email, String address, String type, int balance) {
         try {
             Statement stmt = con.createStatement();
-            String sql = "insert into user values(" + ID + ",'" + name + "','" + password + "','" + phone + "','" + email + "','" + address + "'," + balance + ")";
+            String sql = "insert into user values(" + ID + ",'" + name + "','" + password + "','" + phone + "','" + email + "','" + address + "','" + type + "'," + balance + ")";
             stmt.execute(sql);
             stmt.close();
             System.out.println("插入数据成功!");

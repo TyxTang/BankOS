@@ -72,15 +72,15 @@ public class LoginUI extends JFrame {
     }
     class handler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            passwordString = new String(passwordInput.getPassword());
-            LoginInspection inspection = new LoginInspection();
-            /*if(inspection.login(getId(), getPassword())){
-                //LoginSuccess success = new LoginSuccess();
+            //将账号密码与数据库中的账号密码进行比对
+            LoginInspection login = new LoginInspection();
+            if(login.login(getId(), getPassword())){
+                new LoginUI();
                 dispose();
             }
-            else {
-                JOptionPane.showMessageDialog(null, "用户名或密码错误");
-            }*/
+            else{
+                JOptionPane.showMessageDialog(null, "账号或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }
