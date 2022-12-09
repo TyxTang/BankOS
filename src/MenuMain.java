@@ -47,7 +47,7 @@ public class MenuMain extends JFrame {
         c.add(outMoney);
         c.add(editInf);
         c.add(quit);
-        this.setSize(340, 300);
+        this.setSize(340, 330);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);

@@ -30,14 +30,16 @@ public class WithdrawMoney extends JFrame {
         done2.addActionListener(e -> {
             //取钱
             double qq = Double.parseDouble(qqInput.getText());
+            String balance_2String = String.format("%.2f", qq);
             SQL sql1 = new SQL();
             if(sql1.outMoney(IDnow.getID_now(),qq)){
-                JOptionPane.showMessageDialog(null, "取款成功！取款金额为：" + qq , "提示", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "取款成功！取款金额为：" + balance_2String , "提示", JOptionPane.INFORMATION_MESSAGE);
                 WithdrawMoney.this.dispose();
                 MenuMain menuMain = new MenuMain();
             }
             else{
-                JOptionPane.showMessageDialog(null, "取款失败！余额不足，你的余额为：" + sql.getBalance(IDnow.getID_now()), "提示", JOptionPane.INFORMATION_MESSAGE);
+                String balance_3String = String.format("%.2f", sql.getBalance(IDnow.getID_now()));
+                JOptionPane.showMessageDialog(null, "取款失败！余额不足，你的余额为：" + balance_3String , "提示", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
