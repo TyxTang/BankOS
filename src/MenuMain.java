@@ -22,7 +22,10 @@ public class MenuMain extends JFrame {
         Title2.setHorizontalAlignment(SwingConstants.CENTER);
         //Title3的值为从数据库中读取的余额
         SQL sql_menu = new SQL();
-        Title3 = new JLabel(sql_menu.getBalance(IDnow.getID_now()) + "");
+        //新建Double类型balance变量，显示为10进制的字符串
+        Double balance = sql_menu.getBalance(IDnow.getID_now());
+        String balanceString = String.format("%.2f", balance);
+        Title3 = new JLabel(balanceString + "");
         Title3.setFont(new Font("黑体", Font.PLAIN, 14));
         Title3.setHorizontalAlignment(SwingConstants.CENTER);
         checkInf =new JButton("1.查看账户信息");

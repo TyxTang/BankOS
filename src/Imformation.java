@@ -48,7 +48,8 @@ public class Imformation extends JFrame {
         address.setEditable(false);
         this.add(new JLabel("余        额"));
         this.add(balance);
-        balance.setText(String.valueOf(IDnow.getBalance()));
+        String balanceString = String.format("%.2f", IDnow.getBalance());
+        balance.setText(String.valueOf(balanceString));
         balance.setEditable(false);
         this.add(new JLabel("账户类型"));
         this.add(type);

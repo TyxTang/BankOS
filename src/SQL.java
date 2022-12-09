@@ -126,7 +126,7 @@ public class SQL {
             String sql = "select * from user where ID = " + ID;
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()) {
-                return rs.getInt("balance");
+                return rs.getDouble("balance");
             }
             stmt.close();
             rs.close();

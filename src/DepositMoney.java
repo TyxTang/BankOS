@@ -25,13 +25,16 @@ public class DepositMoney extends JFrame{
         sql.createTable();
         cancel1.addActionListener(e -> {
             DepositMoney.this.dispose();
+            MenuMain menuMain = new MenuMain();
         });
         done1.addActionListener(e -> {
             //存钱
             double cq = Double.parseDouble(cqInput.getText());
+            String balanceString = String.format("%.2f", cq);
             SQL sql1 = new SQL();
             if(sql1.recharge(IDnow.getID_now(),cq)){
-                JOptionPane.showMessageDialog(null, "存款成功！存款金额为：" + cq , "提示", JOptionPane.INFORMATION_MESSAGE);
+
+                JOptionPane.showMessageDialog(null, "存款成功！存款金额为：" + balanceString , "提示", JOptionPane.INFORMATION_MESSAGE);
                 DepositMoney.this.dispose();
                 MenuMain menuMain = new MenuMain();
             }
