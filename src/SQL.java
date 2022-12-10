@@ -28,7 +28,7 @@ public class SQL {
     public void createTable() {
         try {
             Statement stmt = con.createStatement();
-            String sql = "create table user (ID bigint primary key, name char(15) not null, password char(20) not null, phone char(15) not null, email char(30) not null, address char(60) not null,type char(15) not null, balance int not null)";
+            String sql = "create table user (ID bigint primary key, name char(15) not null, password char(20) not null, phone char(20) not null, email char(30) not null, address char(60) not null,type char(15) not null, balance int not null)";
             stmt.execute(sql);
             stmt.close();
             System.out.println("建立数据库成功!");

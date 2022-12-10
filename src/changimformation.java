@@ -77,7 +77,7 @@ public class changimformation extends JFrame {
 
         operate.addActionListener(e -> {
             SQL sql_Info = new SQL();
-            if(sql_Info.changeInfo(IDnow.getID_now(), Phone.getText(), mail.getText(), address.getText())){
+            if(sql_Info.changeInfo(IDnow.getID_now(),address.getText(), Phone.getText(), mail.getText())){
                 JOptionPane.showMessageDialog(null, "信息修改成功");
             }
             else{
